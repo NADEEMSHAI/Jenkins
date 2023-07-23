@@ -10,7 +10,7 @@ pipeline {
         jdk 'jdk-8'
     }
     stages {
-        stage('gameoflife') {
+        stage('vcs') {
             steps { 
                 git url: 'https://github.com/wakaleo/game-of-life.git',
                     branch: 'master'
