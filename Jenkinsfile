@@ -12,8 +12,7 @@ pipeline {
     stages {
         stage('vcs'){
             steps { 
-                git url: 'https://github.com/NADEEMSHAI/game-of-life.git',
-                    branch: 'master'
+                git url: 'https://github.com/NADEEMSHAI/game-of-life.git'
                 }
         }
         stage('packages'){
