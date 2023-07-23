@@ -16,7 +16,7 @@ pipeline {
                     branch: 'master'
                 }
         stage('packages') {
-            steps{
+            steps {
                 sh 'java -version'
                 sh 'mvn package'
             }
