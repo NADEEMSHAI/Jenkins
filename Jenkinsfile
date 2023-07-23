@@ -12,7 +12,8 @@ pipeline {
     stages {
         stage('gameoflife') {
             steps { 
-                git url: 'https://github.com/wakaleo/game-of-life.git'
+                git url: 'https://github.com/wakaleo/game-of-life.git',
+                    branch: 'master'
                 }
         stage('packages') {
             steps{
