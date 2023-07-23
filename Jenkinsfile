@@ -20,6 +20,11 @@ pipeline {
                 sh 'java -version'
                 sh 'mvn package'
             }
+        }
+        stage('artifacts'){
+            archiveArtifacts onlyIfSuccessful: true,
+                             artifacts: '**/target/gameoflife.war'
+            junit testResults: '**/surefire-reports/TEST-*.xml' 
         }  
     }
 }
