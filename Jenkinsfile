@@ -10,17 +10,17 @@ pipeline {
         jdk 'jdk-8'
     }
     stages {
-        stage('vcs') {
+        stage('vcs'){
             steps { 
                 git url: 'https://github.com/NADEEMSHAI/game-of-life.git',
                     branch: 'master'
                 }
-        stage('packages') {
+        }
+        stage('packages'){
             steps {
                 sh 'java -version'
                 sh 'mvn package'
             }
-        }
-        }    
+        }  
     }
 }
