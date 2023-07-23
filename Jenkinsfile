@@ -1,7 +1,7 @@
 pipeline {
     agent { label 'jdk-8' }
     triggers {
-        pollSCM( '* * * * *' )
+        pollSCM( '5 * * * *' )
     }
     parameters {
         choice(name: 'jdk-8', choices: [ 'mvn install', 'mvn package', 'mvn clean' ], description: 'pick one' )
