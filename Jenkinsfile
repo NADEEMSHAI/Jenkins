@@ -10,18 +10,18 @@ pipeline {
         jdk 'jdk-8'
     }
     stages {
-        stage('vcs'){
+        stage('vcs') {
             steps { 
                 git url: 'https://github.com/NADEEMSHAI/game-of-life.git'
                 }
         }
-        stage('packages'){
+        stage('packages') {
             steps {
                 sh 'java -version'
                 sh 'mvn package'
             }
         }
-        stage('artifacts'){
+        stage('artifacts') {
             archiveArtifacts onlyIfSuccessful: true,
                              artifacts: '**/target/gameoflife.war'
             junit testResults: '**/surefire-reports/TEST-*.xml' 
