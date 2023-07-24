@@ -29,11 +29,11 @@ So in the jenkins console we also have types of pipelines
      *Organization Folders enable Jenkins to monitor an entire GitHub Organization, Bitbucket Team/Project, GitLab organization, or Gitea organization and automatically create new Multibranch Pipelines for repositories which contain branches and pull requests containing a Jenkinsfile .
 
 
-### Jenkins Declarative Pipeline
+### Declarative Pipeline GAME OF LIFE
 ---------------------------------------
 1. Declarative Pipeline presents a more simplified and opinionated syntax on top of the Pipeline sub-systems.
 2. The basic statements and expressions which are valid in Declarative Pipeline follow the same rules as Groovy’s syntax with the following exceptions:
-3. ![pre](basic%20structure%20of%20pipeline.png)
+3. ![pre](images/basic%20structure%20of%20pipeline.png)
 4. So we will be creating our pipeline through following this method.
 5. Now lets create a pipeline for "game of life". Pipeline should be written by the help of jenkins pipeline steps 
 6. ![refer here]https://www.jenkins.io/doc/book/pipeline/syntax/#agent
@@ -51,15 +51,22 @@ So in the jenkins console we also have types of pipelines
      * So i given the git link in https to code get clone and if you have rather than master branch you need to specify that branch also like main,dev,test.
      * So after code get clone i have to write a next stage to determine that what should do with that code.
      * I need to do mvn package. So the work was done 
-     * ![pre](j1.png)
+     * ![pre](images/j2.png)
+     * ![pre](images/j1.png)
   
 10. So above steps i have just done mvn package after that i need to do the package in to artifacts.
 11. ![refer here]https://github.com/NADEEMSHAI/Jenkins/commit/f063d415aef40c33f0a7f3bd8f71f2a0921070ee
 12. So here i had build the artifacts and also junit test. Here also i have made more commits please the all commit and changes 
-13. ![pre](j3.png)
+13. ![pre](images/j3.png)
 14. So here you can see the artifacts build sucessfully.
-    
 
+
+### Declarative Pipeline for SPRING PET CLINIC
+------------------------------------------------------
+
+1. Now we are writing the pipeline for spring pet clinic in the same method. For spc we need latest version of maven and java-17.
+2. So let us first setup the tools. For that we need to download the mvn latest version 3.9.0 which is zip file and untar it after that set up the path of maven latest. Install java-17.
+3. 
    
    
 
