@@ -2,9 +2,6 @@ pipeline {
     agent { label 'jdk-17' }
     triggers { 
         pollSCM('5 * * * *') }
-    parameters {
-        choice( name: 'spc', choices: ['mvn install', 'mvn package', 'mvn clean'], description: 'spc package')
-    }
     tools {
         maven 'maven'
         jdk 'jdk-17'
