@@ -22,5 +22,11 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage('spc artifact') {
+            steps {
+            archiveArtifacts artifacts: '**/target/springpetclinic-jar', onlyIfSuccessful: true
+            junit testResults: '**/surefire-reports/TEST-*.xml'
+            }
+        }
     }
 }

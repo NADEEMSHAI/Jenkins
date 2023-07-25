@@ -66,18 +66,66 @@ So in the jenkins console we also have types of pipelines
 
 1. Now we are writing the pipeline for spring pet clinic in the same method. For spc we need latest version of maven and java-17.
 2. So let us first setup the tools. For that we need to download the mvn latest version 3.9.0 which is zip file and untar it after that set up the path of maven latest. Install java-17.
-3. 
-   
-   
+
+```
+cd /tmp
+wget https://dlcdn.apache.org/maven/maven-3/3.9.3/binaries/apache-maven-3.9.3-bin.tar.gz
+sudo mkdir /usr/share/maven
+sudo tar -xvzf apache-maven-3.9.3-bin.tar.gz -C /usr/share/maven
+# add /usr/share/maven/apache-maven-3.9.3/bin to the PATH variable
+# add to ~/.bashrc or /etc/environment
+mvn --version
+```
+3. We need to add the tools in jenkins console like java versions as well as maven.
+4. ![pre](images/j6.png)
+5. ![pre](images/j7.png)
+6. So we have set up the maven path and java after that we need to write the pipeline
+7. ![pre](images/j4.png) 
+8. so we have successfully build that pipeline.
+9.  ![pre](images/j5.png)
+10. Let us put the artifact in Jfrog. For that we need to create a free acc of Jfrog and link to jenkins.
+11. This is the JFROG artifact jenkins pipeline configuration ![refer here]https://directdevops.blog/2019/10/17/artifactory-configuration/ 
 
 
+### JFROG INTEGRATION WITH JENKINS
+----------------------------------------
 
+1. Lets us create a Jfrog account with Gmail as well as a repositary of maven.
+    * ![pre](images/j8.png)
+    * ![pre](images/j9.png)
+    * we need to create a user and password for that go to settings > user management > tick the adiminstrater box.
+    *  ![pre](images/j10.png)
+    * create a group add user into the group. 
+    * ![pre](images/j11.png)
+    * Genrate access token.
+    * ![PRE](images/J12.png)
+    * Take the url of jforg portal to access.
+    * ```
+      https://nadeemjfrog.jfrog.io/
+    ```
+2. Goto the Jenkins console and add the token in credentails part just like ssh key added.
+    * ![pre](images/j13.png)
+    * ![pre](images/j14.png)
+    * Now go to manage jenkins > system > scorll to Jfrog section here give instance id (anyting) and url of Jfrog.
+    * ![pre](images/j15.png)
+    * Here you need to tick the box of " Use the Credentials Plugin " after that untick onces then you can able to see " credentials " in that you can select that token which we added in credentials plugin.
+    * If you observer their is an option to " Test Connection " click and test weather it configured correctly or not. 
+  
 
+### Lets Build SPC With Artifacts Stored In Jfrog
+---------------------------------------------------------
 
-
-
-
-
+1. This is a git repositary for example to write a pipeline spc with artifacts stored in jfrog.
+   ![refe here]https://github.com/jfrog/project-examples/blob/master/jenkins-examples/pipeline-examples/declarative-examples/jenkins-with-jfrog-pipelines/Jenkinsfile
+2. Here we no need to mention the shell script sh command mvn package because we want to just build and package in Jfrog.
+3. We need to write some of below steps which we needed only.
+    * rtServer 
+    * rtMavenResolver
+    * rtMavenDeployer
+    * rtMavenRun
+    * rtPublishBuildInfo
+    * rtDockerPush
+4. 
 
 
 
