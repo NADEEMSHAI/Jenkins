@@ -25,7 +25,7 @@ pipeline {
                     snapshotRepo: nadeem-jfrog-libs-snapshot,
                 )
                 rtMavenRun (
-                    tool: 'Maven 3.3.9',
+                    tool: 'maven',
                     pom: 'pom.xml',
                     goals: 'clean install',
                     deployerId: "maven-deployer",
