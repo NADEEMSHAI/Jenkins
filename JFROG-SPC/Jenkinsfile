@@ -1,0 +1,42 @@
+pipeline {
+    agent { label 'jdk-17' }
+    triggers { 
+        pollSCM('5 * * * *') }
+    tools {
+        maven 'maven'
+        jdk 'jdk-17'
+    }
+    stages {
+        stage('spc git') {
+            steps {
+                git url: 'https://github.com/spring-projects/spring-petclinic.git',
+                    branch: 'main'
+            }
+        }
+        stage('packages') {
+            steps {
+                rtMavenDeployer (
+                    id: "maven-deployer",
+                    serverId: "JFROG",
+                    releaseRepo: nadeem-jfrog-libs-release-local,
+                    snapshotRepo: nadeem-jfrog-libs-snapshot-local,
+                )
+                rtMavenRun (
+                    tool: 'maven',
+                    pom: 'pom.xml',
+                    goals: 'clean install',
+                    deployerId: "maven-deployer",
+                )
+                rtPublishBuildInfo (
+                    serverId: "JFROG"
+                )
+            }
+        }
+        stage('reporting') {
+            steps {
+                junit testResults: '**/target/surefire-reports/TEST-*.xml'
+            }
+        }
+        
+    }
+}

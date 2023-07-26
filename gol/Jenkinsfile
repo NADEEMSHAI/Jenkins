@@ -8,6 +8,7 @@ pipeline {
     }
     tools {
         jdk 'jdk-8'
+        maven 'mvn-3.6'
     }
     stages {
         stage('vcs') {
@@ -17,28 +18,17 @@ pipeline {
         }
         stage('packages') {
             steps {
-                rtMavenDeployer (
-                    id: "maven-deployer",
-                    serverId: "JFROG",
-                    releaseRepo: nadeem-jfrog-libs-release,
-                    snapshotRepo: nadeem-jfrog-libs-snapshot,
-                )
-                rtMavenRun (
-                    tool: 'Maven 3.3.9',
-                    pom: 'pom.xml',
-                    goals: 'clean install',
-                    deployerId: "maven-deployer",
-                )
-                rtPublishBuildInfo (
-                    serverId: "JFROG"
-                )
+                sh 'java -version'
+                sh 'mvn --version'
+                sh 'mvn package'
             }
         }
-        stage('reporting') {
+        stage('artifact') {
             steps {
-                junit testResults: '**/target/surefire-reports/TEST-*.xml'
+                archiveArtifacts onlyIfSuccessful: true,
+                artifacts: '**/target/gameoflife.war'
+                junit testResults: '**/surefire-reports/TEST-*.xml'
             }
         }
-        
     }
 }

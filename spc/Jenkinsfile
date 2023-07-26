@@ -1,42 +1,31 @@
 pipeline {
     agent { label 'jdk-17' }
-    triggers { 
-        pollSCM('5 * * * *') }
+    triggers {
+        pollSCM( '5 * * * *' )
+    }
     tools {
-        maven 'maven'
         jdk 'jdk-17'
+        maven 'mvn-3.9'
     }
     stages {
-        stage('spc git') {
+        stage( 'vcs' ) {
             steps {
                 git url: 'https://github.com/spring-projects/spring-petclinic.git',
                     branch: 'main'
             }
         }
-        stage('packages') {
+        stage( 'build' ) {
             steps {
-                rtMavenDeployer (
-                    id: "maven-deployer",
-                    serverId: "JFROG",
-                    releaseRepo: nadeem-jfrog-libs-release,
-                    snapshotRepo: nadeem-jfrog-libs-snapshot,
-                )
-                rtMavenRun (
-                    tool: 'maven',
-                    pom: 'pom.xml',
-                    goals: 'clean install',
-                    deployerId: "maven-deployer",
-                )
-                rtPublishBuildInfo (
-                    serverId: "JFROG"
-                )
+                sh 'java -version'
+                sh 'mvn package'
             }
         }
-        stage('reporting') {
+        stage( 'artifact' ) {
             steps {
-                junit testResults: '**/target/surefire-reports/TEST-*.xml'
+                archiveArtifacts onlyIfSuccessful: true,
+                artifacts: '**/target/springpetclinic.jar'
+                junit testResults: '**/surefire-reports/TEST-*.xml'
             }
         }
-        
     }
 }
