@@ -8,6 +8,7 @@ pipeline {
     }
     tools {
         jdk 'jdk-8'
+        maven 'maven-6'
     }
     stages {
         stage('vcs') {
@@ -20,8 +21,8 @@ pipeline {
                 rtMavenDeployer (
                     id: "maven-deployer",
                     serverId: "JFROG",
-                    releaseRepo: nadeem-jfrog-libs-release,
-                    snapshotRepo: nadeem-jfrog-libs-snapshot,
+                    releaseRepo: nadeem-jfrog-libs-release-local,
+                    snapshotRepo: nadeem-jfrog-libs-snapshot-local,
                 )
                 rtMavenRun (
                     tool: 'maven',
