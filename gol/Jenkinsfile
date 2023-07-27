@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jdk-8' }
+    agent { label 'javamaven6' }
     triggers {
         pollSCM( '5 * * * *' )
     }
@@ -7,7 +7,7 @@ pipeline {
         choice(name: 'jdk-8', choices: [ 'mvn install', 'mvn package', 'mvn clean' ], description: 'pick one' )
     }
     tools {
-        jdk 'javamaven6'
+        jdk 'jdk-8'
         maven 'maven-6'
     }
     stages {
