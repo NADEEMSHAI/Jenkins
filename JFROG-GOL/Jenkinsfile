@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jdk-8' }
+    agent { label 'javamaven6' }
     triggers {
         pollSCM( '5 * * * *' )
     }
