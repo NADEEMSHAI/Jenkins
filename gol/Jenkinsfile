@@ -7,7 +7,7 @@ pipeline {
         choice(name: 'jdk-8', choices: [ 'mvn install', 'mvn package', 'mvn clean' ], description: 'pick one' )
     }
     tools {
-        jdk 'jdk-8'
+        jdk 'javamaven6'
         maven 'maven-6'
     }
     stages {
