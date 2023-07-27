@@ -24,7 +24,7 @@ pipeline {
             steps {
                 archiveArtifacts onlyIfSuccessful: true,
                 artifacts: '**/target/springpetclinic.jar'
-                junit testResults: '**/surefire-reports/TEST-*.xml'
+                junit testResults: '**/springpetclinic/target/surefire-reports/TEST-*.xml'
             }
         }
     }
